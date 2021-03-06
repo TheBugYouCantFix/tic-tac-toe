@@ -121,12 +121,18 @@ const reset = () => {
     }
 };
 
+const not_zeros = arr => arr.some(i => i != 0);
 
 const undo = () => {
-    player_turn = player_turn === 1 ? 2 : 1;
-    turns--;    
-    undo_button.disabled = false;
-    buttons[clicked_buttons[clicked_buttons.length - 1]].disabled = false;
-    buttons[clicked_buttons[clicked_buttons.length - 1]].style.backgroundColor = '';
-    buttons[clicked_buttons[clicked_buttons.length - 1]].innerText = '';
+    if(not_zeros(clicked_buttons)){
+        player_turn = player_turn === 1 ? 2 : 1;
+        turns--; 
+        undo_button.disabled = false;
+        buttons[clicked_buttons[clicked_buttons.length - 1]].disabled = false;
+        button_state[clicked_buttons[clicked_buttons.length - 1]] = 0;
+        buttons[clicked_buttons[clicked_buttons.length - 1]].style.backgroundColor = '';
+        buttons[clicked_buttons[clicked_buttons.length - 1]].innerText = '';
+        par.innerText = `Player ${player_turn} turn`;
+        clicked_buttons = clicked_buttons.splice(0, clicked_buttons.length - 1);
+    }       
 };
