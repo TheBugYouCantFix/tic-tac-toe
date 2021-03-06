@@ -112,9 +112,11 @@ const clicked = (clicked_id) => {
 const reset = () => {
     for(let i = 0; i < buttons.length; i++){
         buttons[i].disabled = false;
+        undo_button.disabled = false;
         buttons[i].style.backgroundColor = '';
         buttons[i].innerText = '';
         par.setAttribute("class", '');
+        clicked_buttons = []
         button_state[i] = 0;
         turns = 0;
         player_turn = 1;
@@ -127,7 +129,6 @@ const undo = () => {
     if(not_zeros(clicked_buttons)){
         player_turn = player_turn === 1 ? 2 : 1;
         turns--; 
-        undo_button.disabled = false;
         buttons[clicked_buttons[clicked_buttons.length - 1]].disabled = false;
         button_state[clicked_buttons[clicked_buttons.length - 1]] = 0;
         buttons[clicked_buttons[clicked_buttons.length - 1]].style.backgroundColor = '';
