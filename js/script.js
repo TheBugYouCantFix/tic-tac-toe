@@ -120,6 +120,7 @@ const reset = () => {
         button_state[i] = 0;
         turns = 0;
         player_turn = 1;
+        par.innerText = `Player ${player_turn} turn`;
     }
 };
 
@@ -134,6 +135,6 @@ const undo = () => {
         buttons[clicked_buttons[clicked_buttons.length - 1]].style.backgroundColor = '';
         buttons[clicked_buttons[clicked_buttons.length - 1]].innerText = '';
         par.innerText = `Player ${player_turn} turn`;
-        clicked_buttons = clicked_buttons.splice(0, clicked_buttons.length - 1);
+        clicked_buttons = clicked_buttons.splice(0, clicked_buttons.length - 1); //removing the last element
     }       
 };
