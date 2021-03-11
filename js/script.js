@@ -79,7 +79,8 @@ const clicked = (clicked_id) => {
         buttons[clicked_id].innerText = player2.symbol;
         button_state[clicked_id] = player2.value;
     }
-
+    
+    buttons[clicked_id].disabled = true;
     clicked_buttons.push(clicked_id);
 
     if (check_win() || check_draw()){
@@ -112,16 +113,21 @@ const clicked = (clicked_id) => {
 const reset = () => {
     for(let i = 0; i < buttons.length; i++){
         buttons[i].disabled = false;
-        undo_button.disabled = false;
+        
         buttons[i].style.backgroundColor = '';
         buttons[i].innerText = '';
+        
         par.setAttribute("class", '');
         clicked_buttons = []
+        
         button_state[i] = 0;
         turns = 0;
         player_turn = 1;
+        
         par.innerText = `Player ${player_turn} turn`;
     }
+    
+    undo_button.disabled = false;
 };
 
 const not_zeros = arr => arr.some(i => i != 0);
@@ -130,10 +136,13 @@ const undo = () => {
     if(not_zeros(clicked_buttons)){
         player_turn = player_turn === 1 ? 2 : 1;
         turns--; 
+        
         buttons[clicked_buttons[clicked_buttons.length - 1]].disabled = false;
-        button_state[clicked_buttons[clicked_buttons.length - 1]] = 0;
+        button_state[clicked_buttons[clicked_buttons.length - 1]] = 0
+        
         buttons[clicked_buttons[clicked_buttons.length - 1]].style.backgroundColor = '';
         buttons[clicked_buttons[clicked_buttons.length - 1]].innerText = '';
+        
         par.innerText = `Player ${player_turn} turn`;
         clicked_buttons = clicked_buttons.splice(0, clicked_buttons.length - 1); //removing the last element
     }       
